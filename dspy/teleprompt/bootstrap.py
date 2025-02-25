@@ -198,7 +198,8 @@ class BootstrapFewShot(Teleprompter):
                         predictor.demos = predictor_cache[name]
 
                 if self.metric:
-                    metric_val = self.metric(example, prediction, trace)
+                    instructions = teacher.signature.instructions
+                    metric_val = self.metric(example, prediction, instructions, trace)
                     if self.metric_threshold:
                         success = metric_val >= self.metric_threshold
                     else:
